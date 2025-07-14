@@ -38,14 +38,14 @@ import jwt from 'jsonwebtoken';
  *         description: Email already exists
  */
 export const registerUser = async (req, res) => {
-    const { email, password } = req.body;
+    const { name, email, password } = req.body;
 
     try {
         const exists = await db.User.findOne({ where: { email } });
         if (exists) return res.status(400).json({ error: 'Email already registered' });
 
-        const user = await db.User.create({ email, password });
-        res.status(201).json({ message: 'User registered', user: { id: user.id, email: user.email } });
+        const user = await db.User.create({ name, email, password });
+        res.status(201).json({ message: 'User registered', user: { id: user.id, name: user.name, email: user.email } });
     } catch (err) {
         res.status(500).json({ error: 'Registration error', details: err.message });
     }

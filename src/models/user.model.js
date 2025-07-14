@@ -3,6 +3,10 @@ import bcrypt from 'bcrypt';
 
 const UserModel = (sequelize) => {
     const User = sequelize.define('User', {
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
         email: {
             type: DataTypes.STRING,
             allowNull: false,

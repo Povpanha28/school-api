@@ -6,11 +6,13 @@ import teacherRoutes from './routes/teacher.routes.js';
 import authenticationRoutes from './routes/authetication.routes.js';
 import { authenticateToken } from './middleware/authetication.js';
 import { serveSwagger, setupSwagger } from './config/swagger.js';
+import cors from 'cors';
 
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
 app.use(express.json());
 
 app.use('/docs', serveSwagger, setupSwagger);
